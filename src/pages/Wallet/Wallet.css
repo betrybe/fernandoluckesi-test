@@ -1,0 +1,9 @@
+div {
+  margin: 0;
+  padding: 0;
+}
+
+.mainContainerWallet {
+  border: 1px solid red;
+  width: 100%;
+}
