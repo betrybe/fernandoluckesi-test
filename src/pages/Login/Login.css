@@ -1,0 +1,55 @@
+div, img, p {
+  margin: 0;
+  padding: 0;
+}
+
+.mainContainerLogin {
+  align-items: 'center';
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.formContainerLogin {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  padding: 32px;
+}
+
+.logoContainerLogin {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.titleLogoLogin {
+  color: #057405;
+  font-size: 32px;
+  border: 1px solid;
+}
+
+.logoLogin {
+  margin-top: 16px;
+  border: 1px solid red;
+  width: 150px;
+}
+
+.inputsContainerLogin {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+}
+
+.inputLogin {
+  border-radius: 8px;
+  margin-bottom: 16px;
+  padding: 8px 16px;
+  width: 250px;
+}
+
+.btnLogin {
+  
+}

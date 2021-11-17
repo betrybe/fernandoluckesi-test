@@ -1,1 +1,19 @@
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
+const ADD_EXPENSE = 'ADD_EXPENSE';
+
+const stateDefault = {
+  currencies: [],
+  expenses: [],
+};
+
+export default function 
+(state = stateDefault, action) {
+  switch (action.type) {
+    case ADD_EXPENSE:
+      return {
+        ...state,
+        expenses: action.expenses,
+      };
+    default:
+      return state;
+  }
+}
