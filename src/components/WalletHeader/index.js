@@ -10,6 +10,8 @@ class WalletHeader extends React.Component {
 			<div className='mainContaierWalletHeader'>
 				<p data-testid='email-field'>{getUserEmail}
         </p>
+        <p data-testid="total-field">Despesa total: </p>
+        <p data-testid="header-currency-field">Moeda: BRL</p>
 			</div>
 		);
 	}

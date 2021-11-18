@@ -80,6 +80,7 @@ class FormLogin extends React.Component {
 				</div>
 				<div className='inputsContainerLogin'>
 					<input
+            type="text"
 						className='inputLogin'
 						data-testid='email-input'
 						placeholder='Digite seu e-mail'
@@ -89,6 +90,7 @@ class FormLogin extends React.Component {
 						<p className="msgErrorLogin">E-mail inválido. Digite um e-mail no formato: email@email.com</p>
 					)}
 					<input
+            type="password"
 						className='inputLogin'
 						data-testid='password-input'
 						placeholder='Digite sua senha'
