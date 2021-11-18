@@ -47,9 +47,10 @@ export default function (state = stateDefault, action) {
       expenseIdEdit: action.expenseId,
     };
   case EDIT_EXPENSE:
+    console.log('action aqui', action.expensesEdited);
     return {
       ...state,
-
+      expenses: action.expensesEdited,
     };
   default:
     return state;

@@ -4,5 +4,20 @@ div, p {
 }
 
 .mainContaierWalletHeader {
-  
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 32px;
+}
+
+.contaierWalletHeader {
+  align-items: center;
+  display: flex;
+}
+
+.contaierWalletHeader p{
+  margin-left: 16px;
+}
+
+.logoWalletHeader {
+  width: 100px;
 }

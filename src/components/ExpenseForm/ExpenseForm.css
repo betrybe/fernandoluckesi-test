@@ -4,10 +4,35 @@ div {
 }
 
 .mainContainerExpenseForm {
-  border: 1px solid green;
+  background-color: #4d2305;
+  padding: 16px 32px;
   width: 100%;
 }
 
 .cotainerFormExpenseForm {
-  
+  display: flex;
+  justify-content: space-between;
+}
+
+.cotainerFormExpenseForm label {
+  color: #ffff;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.cotainerFormExpenseForm input, .cotainerFormExpenseForm select {
+  background-color: #fff;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  padding: 8px;
+  margin-left: 8px;
+}
+
+.btnAddExpense {
+  background-color: #047404;
+  border: none;
+  border-radius: 6px;
+  color: #ffff;
+  padding: 8px;
 }

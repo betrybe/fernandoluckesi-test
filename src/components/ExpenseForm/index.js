@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchCurrencies, addExpenseWithCurrencyQuotes } from '../../actions';
 import './ExpenseForm.css';
 
@@ -17,8 +18,8 @@ class ExpenseForm extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchCurrencies } = this.props;
-    fetchCurrencies();
+    const { fetchCurrenciesProps } = this.props;
+    fetchCurrenciesProps();
   }
 
   onChangeValue(event) {
@@ -62,38 +63,41 @@ class ExpenseForm extends React.Component {
     return (
       <div className="mainContainerExpenseForm">
         <form className="cotainerFormExpenseForm">
-          <label>
+          <label htmlFor="value">
             Valor:
             <input
               type="text"
               name="value"
-              onChange={(event) => this.onChangeValue(event)}
+              onChange={ (event) => this.onChangeValue(event) }
             />
           </label>
-          <label>
+          <label htmlFor="description">
             Descrição:
             <input
               type="text"
               name="description"
-              onChange={(event) => this.onChangeDescription(event)}
+              onChange={ (event) => this.onChangeDescription(event) }
             />
           </label>
-          <label>
+          <label htmlFor="currency">
             Moeda:
             <select
               name="currency"
-              onChange={(event) => this.onChangeCurrency(event)}
+              onChange={ (event) => this.onChangeCurrency(event) }
             >
               {currencies.map((currency, index) => (
-                <option key={index} value={currency}>
+                <option key={ index } value={ currency }>
                   {currency}
                 </option>
               ))}
             </select>
           </label>
-          <label>
+          <label htmlFor="paymentMethod">
             Método de pagamento:
-            <select onChange={(event) => this.onChangeMethod(event)} name="paymentMethod">
+            <select
+              onChange={ (event) => this.onChangeMethod(event) }
+              name="paymentMethod"
+            >
               <option value="money" selected>
                 Dinheiro
               </option>
@@ -101,9 +105,9 @@ class ExpenseForm extends React.Component {
               <option value="Cartão de débito">Cartão de débito</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="expense">
             Tag:
-            <select onChange={(event) => this.onChangeTag(event)} name="expense">
+            <select onChange={ (event) => this.onChangeTag(event) } name="expense">
               <option value="food" selected>
                 Alimentação
               </option>
@@ -113,7 +117,11 @@ class ExpenseForm extends React.Component {
               <option value="Saúde">Saúde</option>
             </select>
           </label>
-          <button type="button" onClick={() => this.onClickAddExpense()}>
+          <button
+            className="btnAddExpense"
+            type="button"
+            onClick={ () => this.onClickAddExpense() }
+          >
             Adicionar despesa
           </button>
         </form>
@@ -128,7 +136,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   addExpense: (expense) => dispatch(addExpenseWithCurrencyQuotes(expense)),
-  fetchCurrencies: () => dispatch(fetchCurrencies()),
+  fetchCurrenciesProps: () => dispatch(fetchCurrencies()),
 });
+
+ExpenseForm.propTypes = {
+  fetchCurrenciesProps: PropTypes.func.isRequired,
+  addExpense: PropTypes.func.isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);

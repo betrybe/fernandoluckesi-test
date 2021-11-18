@@ -6,6 +6,6 @@ const apiCurrencyQuotes = async () => {
   } catch (error) {
     return error;
   }
-}
+};
 
 export default apiCurrencyQuotes;

@@ -4,7 +4,8 @@ div, img, p {
 }
 
 .formContainerLogin {
-  border: 1px solid black;
+  border-radius: 6px;
+  box-shadow: 1px 1px 10px black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,13 +21,17 @@ div, img, p {
 
 .titleLogoLogin {
   color: #057405;
+  font-weight: 800;
   font-size: 32px;
-  border: 1px solid;
+}
+
+.titleLogoLoginSpan {
+  margin-left: 8px;
+  color: #471d00;
 }
 
 .logoLogin {
   margin-top: 16px;
-  border: 1px solid red;
   width: 150px;
 }
 
@@ -36,13 +41,28 @@ div, img, p {
   margin-top: 32px;
 }
 
+.msgErrorLogin {
+  color: red;
+  font-size: 12px;
+  margin: 8px 0 8px;
+  text-align: center;
+  width: 286px;
+}
+
 .inputLogin {
-  border-radius: 8px;
-  margin-bottom: 16px;
-  padding: 8px 16px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  margin-top: 16px;
+  padding: 8px;
   width: 250px;
 }
 
 .btnLogin {
-  
+  border: none;
+  background-color: #057405;
+  border-radius: 8px;
+  color: #ffff;
+  margin-top: 16px;
+  padding: 8px;
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchCurrencies, editExpense } from '../../actions';
 import './ExpenseFormEdit.css';
 
@@ -17,8 +18,8 @@ class ExpenseFormEdit extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchCurrencies, expenseIdEdit, expenses } = this.props;
-    fetchCurrencies();
+    const { fetchCurrenciesProps, expenseIdEdit, expenses } = this.props;
+    fetchCurrenciesProps();
     expenses.forEach((expense) => {
       if (expense.id === expenseIdEdit) {
         this.setState({
@@ -55,24 +56,20 @@ class ExpenseFormEdit extends React.Component {
 
   onClickEditExpense() {
     const { id, value, description, currency, method, tag } = this.state;
-    const expenseState = {
+    const { editExpenseProps, expenses, expenseIdEdit } = this.props;
+    const expensesEdited = expenses;
+    const objIndex = expensesEdited
+      .findIndex(((expense) => expense.id === expenseIdEdit));
+    expensesEdited[objIndex] = {
       id,
       value,
       description,
       currency,
       method,
       tag,
+      exchangeRates: expensesEdited[objIndex].exchangeRates,
     };
-    const { editExpense, expenses, expenseIdEdit } = this.props;
-    expenses.forEach((expense) => {
-      if (expense.id === expenseIdEdit) {
-        return {
-          ...expense, expenseState,
-        };
-      }
-    });
-    console.log(expenses);
-    // editExpense(expense);
+    editExpenseProps(expensesEdited);
   }
 
   render() {
@@ -83,7 +80,7 @@ class ExpenseFormEdit extends React.Component {
       <div className="mainContainerExpenseForm">
         <p>Form edit</p>
         <form className="cotainerFormExpenseForm">
-          <label>
+          <label htmlFor="value">
             Valor:
             <input
               type="text"
@@ -92,7 +89,7 @@ class ExpenseFormEdit extends React.Component {
               value={ value }
             />
           </label>
-          <label>
+          <label htmlFor="description">
             Descrição:
             <input
               type="text"
@@ -101,23 +98,27 @@ class ExpenseFormEdit extends React.Component {
               value={ description }
             />
           </label>
-          <label>
+          <label htmlFor="currency">
             Moeda:
             <select
               name="currency"
               onChange={ (event) => this.onChangeCurrency(event) }
               value={ currency }
             >
-              {currencies.map((currency, index) => (
-                <option key={ index } value={ currency }>
-                  {currency}
+              {currencies.map((currencyItem, index) => (
+                <option key={ index } value={ currencyItem }>
+                  {currencyItem}
                 </option>
               ))}
             </select>
           </label>
-          <label>
+          <label htmlFor="paymentMethod">
             Método de pagamento:
-            <select onChange={ (event) => this.onChangeMethod(event) } name="paymentMethod" value={ method }>
+            <select
+              onChange={ (event) => this.onChangeMethod(event) }
+              name="paymentMethod"
+              value={ method }
+            >
               <option value="money" selected>
                 Dinheiro
               </option>
@@ -125,9 +126,13 @@ class ExpenseFormEdit extends React.Component {
               <option value="Cartão de débito">Cartão de débito</option>
             </select>
           </label>
-          <label>
+          <label htmlFor="expense">
             Tag:
-            <select onChange={ (event) => this.onChangeTag(event) } name="expense" value={ tag }>
+            <select
+              onChange={ (event) => this.onChangeTag(event) }
+              name="expense"
+              value={ tag }
+            >
               <option value="food" selected>
                 Alimentação
               </option>
@@ -153,8 +158,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  editExpense: (expense) => dispatch(editExpense(expense)),
-  fetchCurrencies: () => dispatch(fetchCurrencies()),
+  editExpenseProps: (expensesEdited) => dispatch(editExpense(expensesEdited)),
+  fetchCurrenciesProps: () => dispatch(fetchCurrencies()),
 });
+
+ExpenseFormEdit.propTypes = {
+  fetchCurrenciesProps: PropTypes.func.isRequired,
+  expenseIdEdit: PropTypes.number.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  editExpenseProps: PropTypes.func.isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseFormEdit);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { actionLogin } from '../../actions';
 import logoImage from '../../assets/images/logo.png';
 import './FormLogin.css';
@@ -76,7 +77,10 @@ class FormLogin extends React.Component {
     return (
       <div className="formContainerLogin">
         <div className="logoContainerLogin">
-          <p className="titleLogoLogin">Trybe Wallet</p>
+          <p className="titleLogoLogin">
+            Trybe
+            <span className="titleLogoLoginSpan">Wallet</span>
+          </p>
           <img src={ logoImage } alt="logo Trybe Wallet" className="logoLogin" />
         </div>
         <div className="inputsContainerLogin">
@@ -88,7 +92,11 @@ class FormLogin extends React.Component {
             onChange={ (event) => this.onChangeEmail(event) }
           />
           {emailInvalid && (
-            <p className="msgErrorLogin">E-mail inválido. Digite um e-mail no formato: email@email.com</p>
+            <p
+              className="msgErrorLogin"
+            >
+              E-mail inválido. Digite um e-mail no formato: email@email.com
+            </p>
           )}
           <input
             type="password"
@@ -98,7 +106,11 @@ class FormLogin extends React.Component {
             onChange={ (event) => this.onChangePassword(event) }
           />
           {passwordInvalid && (
-            <p className="msgErrorLogin">Senha inválida. A senha deve ter no minímo 6 digitos</p>
+            <p
+              className="msgErrorLogin"
+            >
+              Senha inválida. A senha deve ter no minímo 6 digitos dsdsdsd
+            </p>
           )}
           <button
             type="button"
@@ -117,5 +129,9 @@ class FormLogin extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   saveEmail: (email) => dispatch(actionLogin(email)),
 });
+
+FormLogin.propTypes = {
+  saveEmail: PropTypes.func.isRequired,
+};
 
 export default connect(null, mapDispatchToProps)(FormLogin);

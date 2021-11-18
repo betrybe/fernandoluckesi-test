@@ -1,21 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { removeExpense, sendExpenseId } from '../../actions';
 
 class ExpensesTable extends React.Component {
-
   onClickEditExpense(expenseId) {
-    const { sendExpenseId } = this.props;
-    sendExpenseId(expenseId);
+    const { sendExpenseIdProps } = this.props;
+    sendExpenseIdProps(expenseId);
   }
 
   onClickRemoveExpense(expenseId) {
-    const { removeExpense } = this.props;
-    removeExpense(expenseId);
+    const { removeExpenseProps } = this.props;
+    removeExpenseProps(expenseId);
   }
 
   render() {
     const { expenses } = this.props;
+    const decimal = 10;
     return (
       <div>
         <table>
@@ -32,35 +33,52 @@ class ExpensesTable extends React.Component {
           </tr>
           {
             expenses.length > 0
-            &&
-            expenses.map((expense) => {
-              const value = parseFloat(expense.value).toFixed(2, 10);
-              const name = expense.exchangeRates[expense.currency].name.replace('/Real Brasileiro', '');
-              const ask = parseFloat(expense.exchangeRates[expense.currency].ask).toFixed(2, 10);
-              const convertedValue = (value * ask).toFixed(2, 10);
+            && expenses.map((expense) => {
+              const value = parseFloat(expense.value).toFixed(2, decimal);
+              const name = expense.exchangeRates[expense.currency].name
+                .replace('/Real Brasileiro', '');
+              const ask = parseFloat(expense.exchangeRates[expense.currency].ask)
+                .toFixed(2, decimal);
+              const convertedValue = (value * ask).toFixed(2, decimal);
               return (
-                <tr key={expense.id}>
+                <tr key={ expense.id }>
                   <td>{expense.description}</td>
                   <td>{expense.tag}</td>
                   <td>{expense.method}</td>
-                  <td>R$ {value}</td>
+                  <td>
+                    R$
+                    {' '}
+                    {value}
+                  </td>
                   <td>{name}</td>
-                  <td>R$ {ask}</td>
-                  <td>R$ {convertedValue}</td>
+                  <td>
+                    R$
+                    {' '}
+                    {ask}
+                  </td>
+                  <td>
+                    R$
+                    {' '}
+                    {convertedValue}
+                  </td>
                   <td>Real</td>
                   <td>
                     <div>
                       <button
-                        onClick={() => this.onClickEditExpense(expense.id)}
+                        type="button"
+                        onClick={ () => this.onClickEditExpense(expense.id) }
                         data-testid="edit-btn"
                       >
                         Editar
                       </button>
                       <button
-                        onClick={() => this.onClickRemoveExpense(expense.id)}
+                        type="button"
+                        onClick={ () => this.onClickRemoveExpense(expense.id) }
                         data-testid="delete-btn"
                       >
-                        Deletar</button>
+                        Deletar
+
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -79,8 +97,14 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  removeExpense: (expenseId) => dispatch(removeExpense(expenseId)),
-  sendExpenseId: (expenseId) => dispatch(sendExpenseId(expenseId)),
+  removeExpenseProps: (expenseId) => dispatch(removeExpense(expenseId)),
+  sendExpenseIdProps: (expenseId) => dispatch(sendExpenseId(expenseId)),
 });
+
+ExpensesTable.propTypes = {
+  sendExpenseIdProps: PropTypes.func.isRequired,
+  removeExpenseProps: PropTypes.func.isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);

@@ -6,12 +6,12 @@ const stateDefault = {
 
 export default function (state = stateDefault, action) {
   switch (action.type) {
-    case LOGIN:
-      return {
-        ...state,
-        email: action.email,
-      };
-    default:
-      return state;
+  case LOGIN:
+    return {
+      ...state,
+      email: action.email,
+    };
+  default:
+    return state;
   }
 }

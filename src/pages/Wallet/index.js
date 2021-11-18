@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import WalletHeader from '../../components/WalletHeader';
 import ExpenseForm from '../../components/ExpenseForm';
 import ExpenseFormEdit from '../../components/ExpenseFormEdit';
@@ -23,5 +24,9 @@ class Wallet extends React.Component {
 const mapStateToProps = (state) => ({
   expenseIdEdit: state.wallet.expenseIdEdit,
 });
+
+Wallet.propTypes = {
+  expenseIdEdit: PropTypes.number.isRequired,
+};
 
 export default connect(mapStateToProps)(Wallet);
