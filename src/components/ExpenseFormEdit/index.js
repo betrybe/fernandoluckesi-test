@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCurrencies, addExpenseWithCurrencyQuotes } from '../../actions';
-import './ExpenseForm.css';
+import { fetchCurrencies, editExpense } from '../../actions';
+import './ExpenseFormEdit.css';
 
-class ExpenseForm extends React.Component {
+class ExpenseFormEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,8 +17,20 @@ class ExpenseForm extends React.Component {
   }
 
   componentDidMount() {
-    const { fetchCurrencies } = this.props;
+    const { fetchCurrencies, expenseIdEdit, expenses } = this.props;
     fetchCurrencies();
+    expenses.forEach((expense) => {
+      if (expense.id === expenseIdEdit) {
+        this.setState({
+          id: expense.id,
+          value: expense.value,
+          description: expense.description,
+          currency: expense.currency,
+          method: expense.method,
+          tag: expense.tag,
+        });
+      }
+    });
   }
 
   onChangeValue(event) {
@@ -41,9 +53,9 @@ class ExpenseForm extends React.Component {
     this.setState({ tag: event.target.value });
   }
 
-  onClickAddExpense() {
+  onClickEditExpense() {
     const { id, value, description, currency, method, tag } = this.state;
-    const expense = {
+    const expenseState = {
       id,
       value,
       description,
@@ -51,23 +63,33 @@ class ExpenseForm extends React.Component {
       method,
       tag,
     };
-    const { addExpense } = this.props;
-    addExpense(expense);
-    this.setState({ id: id + 1 });
+    const { editExpense, expenses, expenseIdEdit } = this.props;
+    expenses.forEach((expense) => {
+      if (expense.id === expenseIdEdit) {
+        return {
+          ...expense, expenseState,
+        };
+      }
+    });
+    console.log(expenses);
+    // editExpense(expense);
   }
 
   render() {
     const { currencies } = this.props;
+    const { value, description, currency, method, tag } = this.state;
 
     return (
       <div className="mainContainerExpenseForm">
+        <p>Form edit</p>
         <form className="cotainerFormExpenseForm">
           <label>
             Valor:
             <input
               type="text"
               name="value"
-              onChange={(event) => this.onChangeValue(event)}
+              onChange={ (event) => this.onChangeValue(event) }
+              value={ value }
             />
           </label>
           <label>
@@ -75,17 +97,19 @@ class ExpenseForm extends React.Component {
             <input
               type="text"
               name="description"
-              onChange={(event) => this.onChangeDescription(event)}
+              onChange={ (event) => this.onChangeDescription(event) }
+              value={ description }
             />
           </label>
           <label>
             Moeda:
             <select
               name="currency"
-              onChange={(event) => this.onChangeCurrency(event)}
+              onChange={ (event) => this.onChangeCurrency(event) }
+              value={ currency }
             >
               {currencies.map((currency, index) => (
-                <option key={index} value={currency}>
+                <option key={ index } value={ currency }>
                   {currency}
                 </option>
               ))}
@@ -93,7 +117,7 @@ class ExpenseForm extends React.Component {
           </label>
           <label>
             Método de pagamento:
-            <select onChange={(event) => this.onChangeMethod(event)} name="paymentMethod">
+            <select onChange={ (event) => this.onChangeMethod(event) } name="paymentMethod" value={ method }>
               <option value="money" selected>
                 Dinheiro
               </option>
@@ -103,7 +127,7 @@ class ExpenseForm extends React.Component {
           </label>
           <label>
             Tag:
-            <select onChange={(event) => this.onChangeTag(event)} name="expense">
+            <select onChange={ (event) => this.onChangeTag(event) } name="expense" value={ tag }>
               <option value="food" selected>
                 Alimentação
               </option>
@@ -113,8 +137,8 @@ class ExpenseForm extends React.Component {
               <option value="Saúde">Saúde</option>
             </select>
           </label>
-          <button type="button" onClick={() => this.onClickAddExpense()}>
-            Adicionar despesa
+          <button type="button" onClick={ () => this.onClickEditExpense() }>
+            Editar despesa
           </button>
         </form>
       </div>
@@ -124,11 +148,13 @@ class ExpenseForm extends React.Component {
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  expenseIdEdit: state.wallet.expenseIdEdit,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  addExpense: (expense) => dispatch(addExpenseWithCurrencyQuotes(expense)),
+  editExpense: (expense) => dispatch(editExpense(expense)),
   fetchCurrencies: () => dispatch(fetchCurrencies()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExpenseForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpenseFormEdit);

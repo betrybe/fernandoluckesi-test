@@ -1,19 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import WalletHeader from '../../components/WalletHeader';
 import ExpenseForm from '../../components/ExpenseForm';
+import ExpenseFormEdit from '../../components/ExpenseFormEdit';
 import ExpensesTable from '../../components/ExpensesTable';
 import './Wallet.css';
 
 class Wallet extends React.Component {
-	render() {
-		return (
-			<div className='mainContainerWallet'>
-				<WalletHeader />
-				<ExpenseForm />
+  render() {
+    const { expenseIdEdit } = this.props;
+    return (
+      <div className="mainContainerWallet">
+        <WalletHeader />
+        {expenseIdEdit === null && <ExpenseForm />}
+        {(expenseIdEdit || expenseIdEdit === 0) && <ExpenseFormEdit />}
         <ExpensesTable />
-			</div>
-		);
-	}
+      </div>
+    );
+  }
 }
 
-export default Wallet;
+const mapStateToProps = (state) => ({
+  expenseIdEdit: state.wallet.expenseIdEdit,
+});
+
+export default connect(mapStateToProps)(Wallet);

@@ -1,12 +1,15 @@
-import apiCurrencyQuotes from "../services/apiCurrencyQuotes";
+import apiCurrencyQuotes from '../services/apiCurrencyQuotes';
 
-const REQUEST_DATA = "REQUEST_DATA";
-const RECEIVE_CURRENCIES = "RECEIVE_CURRENCIES";
-const RECEIVE_FAIL = "RECEIVE_FAIL";
+const REQUEST_DATA = 'REQUEST_DATA';
+const RECEIVE_CURRENCIES = 'RECEIVE_CURRENCIES';
+const RECEIVE_FAIL = 'RECEIVE_FAIL';
 
-const ADD_EXPENSE = "ADD_EXPENSE";
+const ADD_EXPENSE = 'ADD_EXPENSE';
+const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
+const SEND_EXPENSE_ID = 'SEND_EXPENSE_ID';
+const EDIT_EXPENSE = 'EDIT_EXPENSE';
 
-const LOGIN = "LOGIN";
+const LOGIN = 'LOGIN';
 
 const requestData = () => ({
   type: REQUEST_DATA,
@@ -32,6 +35,21 @@ export const addExpense = (expense) => ({
   expense,
 });
 
+export const removeExpense = (expenseId) => ({
+  type: REMOVE_EXPENSE,
+  expenseId,
+});
+
+export const sendExpenseId = (expenseId) => ({
+  type: SEND_EXPENSE_ID,
+  expenseId,
+});
+
+export const editExpense = (expense) => ({
+  type: EDIT_EXPENSE,
+  expense,
+});
+
 export function fetchCurrencies() {
   return (dispatch) => {
     dispatch(requestData());
@@ -39,13 +57,12 @@ export function fetchCurrencies() {
     return apiCurrencyQuotes().then(
       (data) => {
         const currencies = Object.keys(data);
-        console.log(currencies);
         const currenciesFilter = currencies.filter(
-          (currency) => currency !== "USDT"
+          (currency) => currency !== 'USDT',
         );
         dispatch(receiveCurrencies(currenciesFilter));
       },
-      (error) => dispatch(receiveFail(error.message))
+      (error) => dispatch(receiveFail(error.message)),
     );
   };
 }
@@ -56,16 +73,10 @@ export function addExpenseWithCurrencyQuotes(expense) {
 
     return apiCurrencyQuotes().then(
       (data) => {
-        const keysData = Object.keys(data);
-        let dataArray = [];
-        for (let i = 0; i < keysData.length; i += 1) {
-          if (keysData[i] !== "USDT") {
-            dataArray = [...dataArray, data[keysData[i]]];
-          }
-        }
-        dispatch(addExpense({ ...expense, exchangeRates: dataArray }));
+        delete data.USDT;
+        dispatch(addExpense({ ...expense, exchangeRates: data }));
       },
-      (error) => dispatch(receiveFail(error.message))
+      (error) => dispatch(receiveFail(error.message)),
     );
   };
 }
