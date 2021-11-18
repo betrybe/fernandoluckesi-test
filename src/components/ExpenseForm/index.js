@@ -10,15 +10,36 @@ class ExpenseForm extends React.Component {
       id: 0,
       value: 0,
       description: "",
-      currency: "",
-      method: "",
-      tag: "",
+      currency: "USD",
+      method: "Dinheiro",
+      tag: "Alimentação",
     };
   }
 
   componentDidMount() {
     const { fetchCurrencies } = this.props;
     fetchCurrencies();
+  }
+
+  onChangeValue(event) {
+    const parseValue = parseFloat(event.target.value);
+    this.setState({ value: parseValue });
+  }
+
+  onChangeDescription(event) {
+    this.setState({ description: event.target.value });
+  }
+
+  onChangeCurrency(event) {
+    this.setState({ currency: event.target.value });
+  }
+
+  onChangeMethod(event) {
+    this.setState({ method: event.target.value });
+  }
+
+  onChangeTag(event) {
+    this.setState({ tag: event.target.value });
   }
 
   onClickAddExpense() {
@@ -44,15 +65,26 @@ class ExpenseForm extends React.Component {
         <form className="cotainerFormExpenseForm">
           <label>
             Valor:
-            <input type="text" name="value" />
+            <input
+              type="text"
+              name="value"
+              onChange={(event) => this.onChangeValue(event)}
+            />
           </label>
           <label>
             Descrição:
-            <input type="text" name="description" />
+            <input
+              type="text"
+              name="description"
+              onChange={(event) => this.onChangeDescription(event)}
+            />
           </label>
           <label>
             Moeda:
-            <select name="currency">
+            <select
+              name="currency"
+              onChange={(event) => this.onChangeCurrency(event)}
+            >
               {currencies.map((currency, index) => (
                 <option key={index} value={currency}>
                   {currency}
