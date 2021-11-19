@@ -21,7 +21,7 @@ th {
 
 .tableRowData {
   border: 0px solid rgba(0, 0, 255, 0);
-  background-color: #d2c9e7;
+  background-color: #f2eff8;
   margin: 16px 0;
 }
 
@@ -29,4 +29,17 @@ td {
  
   padding: 8px 16px;
   text-align: center;
+}
+
+.btnEditExpense, .btnRemoveExpense {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}
+
+.btneditExpense:hover, .btnRemoveExpense:hover {
+  cursor: pointer;
+}
+
+.editIconImg, .removeIconImg {
+  width: 32px;
 }

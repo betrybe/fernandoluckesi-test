@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { removeExpense, sendExpenseId } from '../../actions';
 import './ExpensesTable.css';
+import editIcon from '../../assets/images/pencil.png';
+import removeIcon from '../../assets/images/remove.png';
 
 class ExpensesTable extends React.Component {
   onClickEditExpense(expenseId) {
@@ -69,18 +71,28 @@ class ExpensesTable extends React.Component {
                   <td>
                     <div>
                       <button
+                        className="btnEditExpense"
                         type="button"
                         onClick={ () => this.onClickEditExpense(expense.id) }
                         data-testid="edit-btn"
                       >
-                        Editar
+                        <img
+                          className="editIconImg"
+                          src={ editIcon }
+                          alt="icone de edicção"
+                        />
                       </button>
                       <button
+                        className="btnRemoveExpense"
                         type="button"
                         onClick={ () => this.onClickRemoveExpense(expense.id) }
                         data-testid="delete-btn"
                       >
-                        Deletar
+                        <img
+                          className="removeIconImg"
+                          src={ removeIcon }
+                          alt="icone de edicção"
+                        />
 
                       </button>
                     </div>

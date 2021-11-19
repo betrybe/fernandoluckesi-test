@@ -4,7 +4,7 @@ div {
 }
 
 .mainContainerExpenseForm {
-  background-color: #121214;
+  background-color: #3A2766;
   padding: 16px 32px;
 }
 
@@ -32,11 +32,20 @@ div {
   width: 80px;
 }
 
+.cotainerFormExpenseForm select:hover {
+  cursor: pointer;
+}
+
 .btnAddExpense {
   background-color: #04d361;
   border: none;
   border-radius: 6px;
   color: #ffff;
   font-weight: 600;
+  outline: none;
   padding: 8px 16px;
+}
+
+.btnAddExpense:hover {
+  cursor: pointer;
 }
