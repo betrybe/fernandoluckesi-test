@@ -66,6 +66,8 @@ class ExpenseForm extends React.Component {
           <label htmlFor="value">
             Valor:
             <input
+              data-testid="value-input"
+              label="value"
               type="text"
               name="value"
               onChange={ (event) => this.onChangeValue(event) }
@@ -74,6 +76,8 @@ class ExpenseForm extends React.Component {
           <label htmlFor="description">
             Descrição:
             <input
+              data-testid="description-input"
+              label="description"
               type="text"
               name="description"
               onChange={ (event) => this.onChangeDescription(event) }
@@ -82,6 +86,8 @@ class ExpenseForm extends React.Component {
           <label htmlFor="currency">
             Moeda:
             <select
+              data-testid="currency-input"
+              label="currency"
               name="currency"
               onChange={ (event) => this.onChangeCurrency(event) }
             >
@@ -95,6 +101,8 @@ class ExpenseForm extends React.Component {
           <label htmlFor="paymentMethod">
             Método de pagamento:
             <select
+              data-testid="method-input"
+              label="paymentMethod"
               onChange={ (event) => this.onChangeMethod(event) }
               name="paymentMethod"
             >
@@ -107,7 +115,12 @@ class ExpenseForm extends React.Component {
           </label>
           <label htmlFor="expense">
             Tag:
-            <select onChange={ (event) => this.onChangeTag(event) } name="expense">
+            <select
+              data-testid="tag-input"
+              label="expense"
+              onChange={ (event) => this.onChangeTag(event) }
+              name="expense"
+            >
               <option value="food" selected>
                 Alimentação
               </option>

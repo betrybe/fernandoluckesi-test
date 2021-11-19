@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { removeExpense, sendExpenseId } from '../../actions';
+import './ExpensesTable.css';
 
 class ExpensesTable extends React.Component {
   onClickEditExpense(expenseId) {
@@ -18,9 +19,9 @@ class ExpensesTable extends React.Component {
     const { expenses } = this.props;
     const decimal = 10;
     return (
-      <div>
-        <table>
-          <tr>
+      <div className="mainContainerExpenseTable">
+        <table className="tableExpenseTable">
+          <tr className="tableRowHeader">
             <th>Descrição</th>
             <th>Tag</th>
             <th>Método de pagamento</th>
@@ -41,7 +42,10 @@ class ExpensesTable extends React.Component {
                 .toFixed(2, decimal);
               const convertedValue = (value * ask).toFixed(2, decimal);
               return (
-                <tr key={ expense.id }>
+                <tr
+                  className="tableRowData"
+                  key={ expense.id }
+                >
                   <td>{expense.description}</td>
                   <td>{expense.tag}</td>
                   <td>{expense.method}</td>

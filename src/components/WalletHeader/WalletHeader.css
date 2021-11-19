@@ -6,7 +6,7 @@ div, p {
 .mainContaierWalletHeader {
   display: flex;
   justify-content: space-between;
-  padding: 16px 32px;
+  padding: 4px 32px;
 }
 
 .contaierWalletHeader {

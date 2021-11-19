@@ -36,6 +36,7 @@ div, img, p {
 }
 
 .inputsContainerLogin {
+  align-items: center;
   display: flex;
   flex-direction: column;
   margin-top: 32px;
@@ -55,7 +56,7 @@ div, img, p {
   outline: none;
   margin-top: 16px;
   padding: 8px;
-  width: 250px;
+  width: 286px;
 }
 
 .btnLogin {
@@ -65,4 +66,5 @@ div, img, p {
   color: #ffff;
   margin-top: 16px;
   padding: 8px;
+  width: 286px;
 }

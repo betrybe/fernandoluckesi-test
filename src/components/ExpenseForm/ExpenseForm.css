@@ -4,7 +4,7 @@ div {
 }
 
 .mainContainerExpenseForm {
-  background-color: #4d2305;
+  background-color: #121214;
   padding: 16px 32px;
 }
 
@@ -33,7 +33,7 @@ div {
 }
 
 .btnAddExpense {
-  background-color: #047404;
+  background-color: #04d361;
   border: none;
   border-radius: 6px;
   color: #ffff;
