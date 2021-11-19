@@ -1,0 +1,18 @@
+.mainContainerExpenseFormEdit {
+  background-color: #121214;
+  padding: 16px 32px;
+}
+
+.btnEditExpense {
+  background-color: #3A2766;
+  border: none;
+  border-radius: 6px;
+  color: #ffff;
+  font-weight: 600;
+  outline: none;
+  padding: 8px 16px;
+}
+
+.btnEditExpense:hover {
+  cursor: pointer;
+}

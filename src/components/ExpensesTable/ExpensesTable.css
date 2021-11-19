@@ -1,0 +1,45 @@
+div, table, tr, th, td, button {
+  margin: 0;
+  padding: 0;
+}
+
+.tableExpenseTable {
+  width: 100%;
+}
+
+.tableRowHeader {
+  border: 1px solid green;
+  background-color: #8258e6;
+  color: #ffff;
+}
+
+th {
+  
+  border: 0px solid rgba(0, 0, 255, 0);
+  padding: 16px 32px;
+}
+
+.tableRowData {
+  border: 0px solid rgba(0, 0, 255, 0);
+  background-color: #f2eff8;
+  margin: 16px 0;
+}
+
+td {
+ 
+  padding: 8px 16px;
+  text-align: center;
+}
+
+.btnEditExpense, .btnRemoveExpense {
+  background-color: rgba(255, 255, 255, 0);
+  border: none;
+}
+
+.btneditExpense:hover, .btnRemoveExpense:hover {
+  cursor: pointer;
+}
+
+.editIconImg, .removeIconImg {
+  width: 32px;
+}

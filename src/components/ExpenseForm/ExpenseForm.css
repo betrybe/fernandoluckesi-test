@@ -1,0 +1,51 @@
+div {
+  margin: 0;
+  padding: 0;
+}
+
+.mainContainerExpenseForm {
+  background-color: #3A2766;
+  padding: 16px 32px;
+}
+
+.cotainerFormExpenseForm {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cotainerFormExpenseForm label {
+  color: #ffff;
+  font-size: 14px;
+  margin-right: 8px;
+}
+
+.cotainerFormExpenseForm input, .cotainerFormExpenseForm select {
+  background-color: #fff;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  padding: 8px;
+  margin-left: 8px;
+}
+
+.cotainerFormExpenseForm input {
+  width: 80px;
+}
+
+.cotainerFormExpenseForm select:hover {
+  cursor: pointer;
+}
+
+.btnAddExpense {
+  background-color: #04d361;
+  border: none;
+  border-radius: 6px;
+  color: #ffff;
+  font-weight: 600;
+  outline: none;
+  padding: 8px 16px;
+}
+
+.btnAddExpense:hover {
+  cursor: pointer;
+}

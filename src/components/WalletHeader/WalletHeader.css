@@ -1,0 +1,23 @@
+div, p {
+  margin: 0;
+  padding: 0;
+}
+
+.mainContaierWalletHeader {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 32px;
+}
+
+.contaierWalletHeader {
+  align-items: center;
+  display: flex;
+}
+
+.contaierWalletHeader p{
+  margin-left: 16px;
+}
+
+.logoWalletHeader {
+  width: 100px;
+}
