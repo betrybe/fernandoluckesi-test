@@ -13,8 +13,8 @@ class Wallet extends React.Component {
     return (
       <div className="mainContainerWallet">
         <WalletHeader />
-        {expenseIdEdit === null && <ExpenseForm />}
-        {(expenseIdEdit || expenseIdEdit === 0) && <ExpenseFormEdit />}
+        {expenseIdEdit === '' && <ExpenseForm />}
+        {expenseIdEdit !== '' && <ExpenseFormEdit />}
         <ExpensesTable />
       </div>
     );
@@ -26,7 +26,7 @@ const mapStateToProps = (state) => ({
 });
 
 Wallet.propTypes = {
-  expenseIdEdit: PropTypes.number.isRequired,
+  expenseIdEdit: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps)(Wallet);

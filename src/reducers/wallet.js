@@ -10,7 +10,7 @@ const EDIT_EXPENSE = 'EDIT_EXPENSE';
 const stateDefault = {
   currencies: [],
   expenses: [],
-  expenseIdEdit: null,
+  expenseIdEdit: '',
 };
 
 export default function (state = stateDefault, action) {
@@ -47,10 +47,9 @@ export default function (state = stateDefault, action) {
       expenseIdEdit: action.expenseId,
     };
   case EDIT_EXPENSE:
-    console.log('action aqui', action.expensesEdited);
     return {
       ...state,
-      expenses: action.expensesEdited,
+      expenses: [...action.expenses],
     };
   default:
     return state;

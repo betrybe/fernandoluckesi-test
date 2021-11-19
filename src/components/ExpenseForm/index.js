@@ -98,7 +98,7 @@ class ExpenseForm extends React.Component {
               onChange={ (event) => this.onChangeMethod(event) }
               name="paymentMethod"
             >
-              <option value="money" selected>
+              <option value="Dinheiro" selected>
                 Dinheiro
               </option>
               <option value="Cartão de crédito">Cartão de crédito</option>

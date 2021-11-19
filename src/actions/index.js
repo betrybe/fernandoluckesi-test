@@ -45,9 +45,9 @@ export const sendExpenseId = (expenseId) => ({
   expenseId,
 });
 
-export const editExpense = (expensesEdited) => ({
+export const editExpense = (expenses) => ({
   type: EDIT_EXPENSE,
-  expensesEdited,
+  expenses,
 });
 
 export function fetchCurrencies() {

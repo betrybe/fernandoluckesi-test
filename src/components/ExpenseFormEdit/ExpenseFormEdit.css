@@ -1,0 +1,13 @@
+.mainContainerExpenseFormEdit {
+  background-color: #0d6f08;
+  padding: 16px 32px;
+}
+
+.btnEditExpense {
+  background-color: #4d2305;
+  border: none;
+  border-radius: 6px;
+  color: #ffff;
+  font-weight: 600;
+  padding: 8px 16px;
+}

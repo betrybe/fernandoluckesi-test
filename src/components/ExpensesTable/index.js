@@ -6,7 +6,7 @@ import { removeExpense, sendExpenseId } from '../../actions';
 class ExpensesTable extends React.Component {
   onClickEditExpense(expenseId) {
     const { sendExpenseIdProps } = this.props;
-    sendExpenseIdProps(expenseId);
+    sendExpenseIdProps(expenseId.toString());
   }
 
   onClickRemoveExpense(expenseId) {

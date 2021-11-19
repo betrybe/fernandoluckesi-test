@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCurrencies, editExpense } from '../../actions';
+import { fetchCurrencies, editExpense, sendExpenseId } from '../../actions';
 import './ExpenseFormEdit.css';
 
 class ExpenseFormEdit extends React.Component {
@@ -20,8 +20,9 @@ class ExpenseFormEdit extends React.Component {
   componentDidMount() {
     const { fetchCurrenciesProps, expenseIdEdit, expenses } = this.props;
     fetchCurrenciesProps();
+    const parseExpenseIdEdit = parseInt(expenseIdEdit, 10);
     expenses.forEach((expense) => {
-      if (expense.id === expenseIdEdit) {
+      if (expense.id === parseExpenseIdEdit) {
         this.setState({
           id: expense.id,
           value: expense.value,
@@ -56,10 +57,11 @@ class ExpenseFormEdit extends React.Component {
 
   onClickEditExpense() {
     const { id, value, description, currency, method, tag } = this.state;
-    const { editExpenseProps, expenses, expenseIdEdit } = this.props;
-    const expensesEdited = expenses;
-    const objIndex = expensesEdited
-      .findIndex(((expense) => expense.id === expenseIdEdit));
+    const { editExpenseProps, expenses, expenseIdEdit, sendExpenseIdProps } = this.props;
+    const expensesEdited = [...expenses];
+    const parseExpenseIdEdit = parseInt(expenseIdEdit, 10);
+    const objIndex = expenses
+      .findIndex(((expense) => expense.id === parseExpenseIdEdit));
     expensesEdited[objIndex] = {
       id,
       value,
@@ -70,6 +72,7 @@ class ExpenseFormEdit extends React.Component {
       exchangeRates: expensesEdited[objIndex].exchangeRates,
     };
     editExpenseProps(expensesEdited);
+    sendExpenseIdProps('');
   }
 
   render() {
@@ -77,9 +80,8 @@ class ExpenseFormEdit extends React.Component {
     const { value, description, currency, method, tag } = this.state;
 
     return (
-      <div className="mainContainerExpenseForm">
-        <p>Form edit</p>
-        <form className="cotainerFormExpenseForm">
+      <div className="mainContainerExpenseFormEdit">
+        <form method="POST" className="cotainerFormExpenseForm">
           <label htmlFor="value">
             Valor:
             <input
@@ -142,7 +144,11 @@ class ExpenseFormEdit extends React.Component {
               <option value="Saúde">Saúde</option>
             </select>
           </label>
-          <button type="button" onClick={ () => this.onClickEditExpense() }>
+          <button
+            className="btnEditExpense"
+            type="button"
+            onClick={ () => this.onClickEditExpense() }
+          >
             Editar despesa
           </button>
         </form>
@@ -160,14 +166,16 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   editExpenseProps: (expensesEdited) => dispatch(editExpense(expensesEdited)),
   fetchCurrenciesProps: () => dispatch(fetchCurrencies()),
+  sendExpenseIdProps: (expenseId) => dispatch(sendExpenseId(expenseId)),
 });
 
 ExpenseFormEdit.propTypes = {
   fetchCurrenciesProps: PropTypes.func.isRequired,
-  expenseIdEdit: PropTypes.number.isRequired,
+  expenseIdEdit: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
   editExpenseProps: PropTypes.func.isRequired,
   currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+  sendExpenseIdProps: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpenseFormEdit);
